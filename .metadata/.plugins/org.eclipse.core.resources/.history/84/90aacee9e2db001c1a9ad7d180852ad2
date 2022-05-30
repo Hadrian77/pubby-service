@@ -1,5 +1,0 @@
-package io.pubby.api;
-
-public class RestController {
-
-}

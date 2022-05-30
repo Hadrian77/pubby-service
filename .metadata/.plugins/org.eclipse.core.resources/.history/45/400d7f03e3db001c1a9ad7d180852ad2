@@ -1,6 +1,0 @@
-package io.pubby.api;
-
-@PubbyController
-public class PubbyController {
-
-}

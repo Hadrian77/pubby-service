@@ -1,6 +1,0 @@
-package io.pubby.api;
-
-@RestController
-public class RestController {
-
-}

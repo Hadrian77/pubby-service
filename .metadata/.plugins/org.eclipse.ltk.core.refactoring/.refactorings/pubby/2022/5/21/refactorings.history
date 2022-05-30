@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Move &apos;PubbyApplication.java&apos; to &apos;pubby&apos;" description="Move &apos;PubbyApplication.java&apos; to &apos;pubby&apos;" destination="src/main/java/io/pubby" element1="src/main/java/io/pubby/pubby/PubbyApplication.java" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1653176170582" updateReferences="true"/>
-</session>
