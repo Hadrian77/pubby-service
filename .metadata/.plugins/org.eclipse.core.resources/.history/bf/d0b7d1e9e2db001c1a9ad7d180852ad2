@@ -1,0 +1,6 @@
+package io.pubby.api;
+
+@PubbyController
+public class RestController {
+
+}

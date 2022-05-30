@@ -1,0 +1,25 @@
+package io.pubby.api;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+
+import org.springframework.web.bind.annotation.RestController;
+
+import io.pubby.models.Question;
+
+@RestController
+public class PubbyController {
+	
+	
+	@GetMapping("/questions")
+	public List<Question> getQuestions(){
+		return null;
+		
+	}
+	
+	
+	
+	
+
+}

@@ -1,0 +1,45 @@
+package io.pubby.pubby;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import io.pubby.repositories.PlayerRepository;
+import io.pubby.repositories.SessionRepository;
+import io.pubby.models.Player;
+import io.pubby.models.Question;
+import io.pubby.models.Session;
+
+@SpringBootTest
+class PubbyApplicationTests {
+
+	
+	@Autowired
+	PlayerRepository playerRepo;
+	@Autowired
+	SessionRepository sessionRepo;
+	
+	@Test
+	void dataServiceTest() {
+		
+		Player player1 = new Player("Adrian","Doughboy");
+		Player player2 = new Player("Bianca","Secret Bianca");
+		
+		Question question1 = new Question("CokeOrPepsi","Binary","Coke or Pepsi?");
+		Question question2 = new Question("SweetOrSavory","Binary","Sweet or Savory?");
+		
+		Session session = new Session();
+		sessionRepo.save(session);
+		
+		
+		player1.setSession(session);
+		player2.setSession(session);
+		
+		playerRepo.save(player1);
+		playerRepo.save(player2);
+		
+		
+		
+	}
+
+}
