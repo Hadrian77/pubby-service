@@ -1,4 +1,4 @@
-package io.pubby.pubby;
+package io.pubby;
 
 
 import java.util.ArrayList;
