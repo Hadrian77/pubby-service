@@ -15,6 +15,8 @@ import io.pubby.data.DataService;
 import io.pubby.models.Player;
 import io.pubby.models.Question;
 import io.pubby.models.Session;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
 public class PubbyController {
@@ -23,7 +25,7 @@ public class PubbyController {
 	DataService dataService;
 
 	@GetMapping("/questions")
-	public List<Question> getQuestions() {
+	public Flux<Question> getQuestions() {
 
 		System.out.println("Working");
 
@@ -32,14 +34,15 @@ public class PubbyController {
 	}
 
 	@PostMapping("/questions")
-	public void createQuestions(@RequestBody List<Question> questions) {
+	public Flux<Question> createQuestions(@RequestBody List<Question> questions) {
 
-		dataService.saveQuestions(questions);
+
+		return dataService.saveQuestions(questions);
 
 	}
-	
+	/*
 	@GetMapping("/players")
-	public List<Player> getAllPlayersInSession(@RequestHeader("X-Session")int sessionId) {
+	public Flux<Player> getAllPlayersInSession(@RequestHeader("X-Session")String sessionId) {
 		
 		
 		return dataService.getPlayersBySessionId(sessionId) ;
@@ -48,18 +51,18 @@ public class PubbyController {
 	}
 
 	@GetMapping("/players/{id}")
-	public Player getPlayerById(@PathVariable int playerId) {
+	public Mono<Player> getPlayerById(@PathVariable String playerId) {
 
 		return dataService.getPlayerById(playerId);
 
 	}
 
 	@PostMapping("/players")
-	public Player createPlayer(@RequestBody Player player,@RequestHeader("X-Session")int sessionId ) {
+	public Player createPlayer(@RequestBody Player player,@RequestHeader("X-Session")String sessionId ) {
 
-		Session session = dataService.getSession(sessionId);
+		//Session session = dataService.getSession(sessionId);
 		
-		player.setSession(session);
+		//player.setSession(session);
 		dataService.savePlayer(player);
 
 		return player;
@@ -78,5 +81,5 @@ public class PubbyController {
 		
 		return session;
 		}
-
+*/
 }

@@ -7,23 +7,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class Session {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int id;
+	String id;
+	
 	Timestamp timeStamp;
 	
 	
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
 
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

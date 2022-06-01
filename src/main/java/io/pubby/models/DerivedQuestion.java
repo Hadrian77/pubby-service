@@ -1,12 +1,13 @@
 package io.pubby.models;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 
-@Entity
+
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class DerivedQuestion extends Question {
 	
-	@ManyToOne
+
 	private Question parentQuestion;
 	
 	
@@ -21,9 +22,11 @@ public class DerivedQuestion extends Question {
 
 	@Override
 	public String toString() {
-		return "DerivedQuestion [parentQuestion=" + parentQuestion + ", id=" + id + ", name=" + name + ", type=" + type
-				+ ", description=" + description + "]";
+		return "DerivedQuestion [parentQuestion=" + parentQuestion + ", id=" + id + ", type=" + type + ", description="
+				+ description + ", pack=" + pack + ", keywords=" + keywords + ", tags=" + tags + "]";
 	}
+
+	
 	
 	
 

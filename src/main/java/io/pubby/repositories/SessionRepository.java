@@ -1,9 +1,9 @@
 package io.pubby.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
 import io.pubby.models.Session;
 
-public interface SessionRepository extends JpaRepository<Session, Integer > {
+public interface SessionRepository extends ReactiveMongoRepository<Session, String > {
 
 }

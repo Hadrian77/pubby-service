@@ -9,7 +9,6 @@ import io.pubby.repositories.PlayerRepository;
 import io.pubby.models.Player;
 
 @SpringBootApplication
-@EnableWebMvc
 public class PubbyApplication {
 
 	public static void main(String[] args) {

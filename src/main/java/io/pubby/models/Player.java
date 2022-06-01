@@ -6,38 +6,39 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-@Entity
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class Player {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int id;
+	String id;
 	
 	String name;
 	
 	String secretName;
 	
-	@ManyToOne
 	Session session;
 	
-	
-	
-
-	public Player() {
-		super();
-	}
 
 	public Player(String name, String secretName) {
 		super();
 		this.name = name;
 		this.secretName = secretName;
 	}
+	
 
-	public int getId() {
+	public Player() {
+		super();
+	}
+
+
+
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -61,14 +62,13 @@ public class Player {
 		return session;
 	}
 
-	public void setSession(Session sessionId) {
-		this.session = sessionId;
+	public void setSession(Session session) {
+		this.session = session;
 	}
+	
+	
+	
 
-	@Override
-	public String toString() {
-		return "Player [id=" + id + ", name=" + name + ", secretName=" + secretName + ", session=" + session + "]";
-	}
 
 	
 	
