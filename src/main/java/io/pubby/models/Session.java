@@ -1,6 +1,7 @@
 package io.pubby.models;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +16,7 @@ public class Session {
 	@Id
 	String id;
 	
-	Timestamp timeStamp;
+	Date timeStamp;
 	
 	
 	
@@ -31,7 +32,7 @@ public class Session {
 
 
 
-	public Timestamp getTimeStamp() {
+	public Date getTimeStamp() {
 		return timeStamp;
 	}
 

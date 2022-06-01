@@ -3,6 +3,8 @@ package io.pubby.data;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import io.pubby.models.AnswerRecord;
@@ -21,13 +23,13 @@ public class DataServiceMongoDBImpl implements DataService {
 
 	@Autowired
 	QuestionRepository questionRepo;
-	
+
 	@Autowired
 	AnswerRecordRepository answerRepo;
-	
+
 	@Autowired
 	SessionRepository sessionRepo;
-	
+
 	@Autowired
 	PlayerRepository playerRepo;
 
@@ -41,12 +43,13 @@ public class DataServiceMongoDBImpl implements DataService {
 	public Flux<Question> saveQuestions(List<Question> questions) {
 		// TODO Auto-generated method stub
 		return questionRepo.saveAll(questions);
+		
 	}
 
 	@Override
-	public void saveSession(Session session) {
-		// TODO Auto-generated method stub
-		sessionRepo.save(session);
+	public Mono<Session> saveSession(Session session) {
+		
+		return sessionRepo.save(session);
 	}
 
 	@Override
@@ -61,17 +64,24 @@ public class DataServiceMongoDBImpl implements DataService {
 		return playerRepo.findById(playerId);
 	}
 
-	/*
 	@Override
 	public Flux<Player> getPlayersBySessionId(String sessionId) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Player examplePlayer = new Player();
+		Session sessionExample = new Session();
+		sessionExample.setId(sessionId);
+		examplePlayer.setSession(sessionExample);
+
+		Example<Player> playerExample = Example.of(examplePlayer, ExampleMatcher.matchingAny());
+
+		return playerRepo.findAll(playerExample);
+
 	}
 
 	@Override
-	public void savePlayer(Player player) {
+	public Mono<Player> savePlayer(Player player) {
 		// TODO Auto-generated method stub
-		
+		return playerRepo.save(player);
 	}
 
 	@Override
@@ -83,13 +93,7 @@ public class DataServiceMongoDBImpl implements DataService {
 	@Override
 	public void saveAnswerRecords(List<AnswerRecord> answerRecords) {
 		// TODO Auto-generated method stub
-		
+		answerRepo.saveAll(answerRecords);
 	}
-	*/
-
-	
-	
-	
-
 
 }

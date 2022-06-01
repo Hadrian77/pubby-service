@@ -17,6 +17,7 @@ import io.pubby.models.Question;
 import io.pubby.models.Session;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.util.function.Tuple2;
 
 @RestController
 public class PubbyController {
@@ -36,21 +37,18 @@ public class PubbyController {
 	@PostMapping("/questions")
 	public Flux<Question> createQuestions(@RequestBody List<Question> questions) {
 
-
 		return dataService.saveQuestions(questions);
 
 	}
-	/*
+
 	@GetMapping("/players")
-	public Flux<Player> getAllPlayersInSession(@RequestHeader("X-Session")String sessionId) {
-		
-		
-		return dataService.getPlayersBySessionId(sessionId) ;
-		
-		
+	public Flux<Player> getAllPlayersInSession(@RequestHeader("X-Session") String sessionId) {
+
+		return dataService.getPlayersBySessionId(sessionId);
+
 	}
 
-	@GetMapping("/players/{id}")
+	@GetMapping("/players/{playerId}")
 	public Mono<Player> getPlayerById(@PathVariable String playerId) {
 
 		return dataService.getPlayerById(playerId);
@@ -58,28 +56,33 @@ public class PubbyController {
 	}
 
 	@PostMapping("/players")
-	public Player createPlayer(@RequestBody Player player,@RequestHeader("X-Session")String sessionId ) {
-
-		//Session session = dataService.getSession(sessionId);
+	public Mono<Player> createPlayer(@RequestBody Player player, @RequestHeader("X-Session") String sessionId) {
 		
-		//player.setSession(session);
-		dataService.savePlayer(player);
-
-		return player;
+		Mono<Tuple2<Player,Session>> playerAndSession = Mono.zip(dataService.savePlayer(player), dataService.getSession(sessionId));
+		
+		
+		return playerAndSession.map(result-> {
+			
+			result.getT1().setSession(result.getT2());
+			return result.getT1();		
+		});
 
 	}
 	
-	@GetMapping()
-	
+	@GetMapping("/sessions/{sessionId}")
+	public Mono<Session> getSession(@PathVariable String sessionId){
+		
+		return dataService.getSession(sessionId);
+	}
+
 	@PostMapping("/sessions")
-	public Session createSession(){
-		
-		
+	public Mono<Session> createSession() {
+
 		Session session = new Session();
 		session.setTimeStamp(new Timestamp(System.currentTimeMillis()));
-		dataService.saveSession(session);
 		
-		return session;
-		}
-*/
+
+		return dataService.saveSession(session);
+	}
+
 }

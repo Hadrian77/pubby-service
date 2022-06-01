@@ -17,22 +17,22 @@ public interface DataService {
 	public Flux<Question> saveQuestions(List<Question> questions);
 
 	
-	public void saveSession(Session session);
+	public Mono<Session> saveSession(Session session);
 	public Mono<Session> getSession(String sessionId);
 	
 	
 	public Mono<Player> getPlayerById(String playerId);
 	
-	//public Flux<Player> getPlayersBySessionId(String sessionId);
+	public Flux<Player> getPlayersBySessionId(String sessionId);
 	
-	//void savePlayer(Player player);
+	public Mono<Player> savePlayer(Player player);
 	
 	
 	
 	//Only a List of AnswerRecords is useful
-	//public Flux<AnswerRecord> getAnswerRecordsByQuestionId(String questionId,String sessionId);
+	public Flux<AnswerRecord> getAnswerRecordsByQuestionId(String questionId,String sessionId);
 	
-	//public void saveAnswerRecords(List<AnswerRecord> answerRecords);
+	public void saveAnswerRecords(List<AnswerRecord> answerRecords);
 
 	
 
