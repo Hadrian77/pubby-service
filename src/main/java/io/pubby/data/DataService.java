@@ -13,6 +13,7 @@ public interface DataService {
 	
 	
 	public Flux<Question> getQuestions();
+	public Mono<Question> getQuestion(String questionId);
 	
 	public Flux<Question> saveQuestions(List<Question> questions);
 
@@ -30,9 +31,9 @@ public interface DataService {
 	
 	
 	//Only a List of AnswerRecords is useful
-	public Flux<AnswerRecord> getAnswerRecordsByQuestionId(String questionId,String sessionId);
+	public Mono<AnswerRecord> getAnswerRecordByQuestionId(String questionId,String sessionId);
 	
-	public void saveAnswerRecords(List<AnswerRecord> answerRecords);
+	public Mono<AnswerRecord> saveAnswerRecord(AnswerRecord answerRecords);
 
 	
 

@@ -5,7 +5,7 @@ package io.pubby.models;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class DerivedQuestion extends Question {
+public class ChildQuestion extends Question {
 	
 
 	private Question parentQuestion;
@@ -22,7 +22,7 @@ public class DerivedQuestion extends Question {
 
 	@Override
 	public String toString() {
-		return "DerivedQuestion [parentQuestion=" + parentQuestion + ", id=" + id + ", type=" + type + ", description="
+		return "=ChildQuestion [parentQuestion=" + parentQuestion + ", id=" + id + ", type=" + type + ", description="
 				+ description + ", pack=" + pack + ", keywords=" + keywords + ", tags=" + tags + "]";
 	}
 

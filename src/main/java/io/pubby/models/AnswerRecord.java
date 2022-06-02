@@ -1,5 +1,7 @@
 package io.pubby.models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 
 
@@ -14,51 +17,38 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class AnswerRecord {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int id;
+	String id;
 	
-	String answer;
-	
-	@ManyToOne
+	@DocumentReference
 	Question question;
 	
-	@ManyToOne
-	Player player;
-	
-	@ManyToOne
+	@DocumentReference
 	Session session;
 	
-	Boolean isChildQuestion;
+
+	List<PlayerResponse> playerResponses;
 	
+	Boolean isChildQuestion;
 	
 
 	public AnswerRecord() {
 		super();
 	}
 
-	public AnswerRecord(String answer, Question question, Player player,Session session, Boolean isChildQuestion) {
+	public AnswerRecord(Question question, Session session, List<PlayerResponse> playerResponses, Boolean isChildQuestion) {
 		super();
-		this.answer = answer;
 		this.question = question;
-		this.player = player;
 		this.session = session;
+		this.playerResponses = playerResponses;
 		this.isChildQuestion = isChildQuestion;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getAnswer() {
-		return answer;
-	}
-
-	public void setAnswer(String answer) {
-		this.answer = answer;
 	}
 
 	public Question getQuestion() {
@@ -69,14 +59,21 @@ public class AnswerRecord {
 		this.question = question;
 	}
 
-	public Player getPlayer() {
-		return player;
+	public Session getSession() {
+		return session;
 	}
 
-	public void setPlayer(Player player) {
-		this.player = player;
+	public void setSession(Session session) {
+		this.session = session;
 	}
-	
+
+	public List<PlayerResponse> getPlayerResponses() {
+		return playerResponses;
+	}
+
+	public void setPlayerResponses(List<PlayerResponse> playerResponses) {
+		this.playerResponses = playerResponses;
+	}
 
 	public Boolean getIsChildQuestion() {
 		return isChildQuestion;
@@ -86,24 +83,11 @@ public class AnswerRecord {
 		this.isChildQuestion = isChildQuestion;
 	}
 
-	public Session getSession() {
-		return session;
-	}
-
-	public void setSession(Session session) {
-		this.session = session;
-	}
-
 	@Override
 	public String toString() {
-		return "AnswerRecord [id=" + id + ", answer=" + answer + ", question=" + question + ", player=" + player
-				+ ", session=" + session + ", isChildQuestion=" + isChildQuestion + "]";
+		return "AnswerRecord [id=" + id + ", question=" + question + ", session=" + session + ", playerResponses="
+				+ playerResponses + ", isChildQuestion=" + isChildQuestion + "]";
 	}
-
-	
-	
-	
-	
 	
 	
 

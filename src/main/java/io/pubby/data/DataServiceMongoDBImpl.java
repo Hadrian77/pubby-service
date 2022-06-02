@@ -38,6 +38,11 @@ public class DataServiceMongoDBImpl implements DataService {
 		// TODO Auto-generated method stub
 		return questionRepo.findAll();
 	}
+	
+	public Mono<Question> getQuestion(String questionId) {
+		// TODO Auto-generated method stub
+		return questionRepo.findById(questionId);
+	}
 
 	@Override
 	public Flux<Question> saveQuestions(List<Question> questions) {
@@ -85,15 +90,29 @@ public class DataServiceMongoDBImpl implements DataService {
 	}
 
 	@Override
-	public Flux<AnswerRecord> getAnswerRecordsByQuestionId(String questionId, String sessionId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Mono<AnswerRecord> getAnswerRecordByQuestionId(String questionId, String sessionId) {
+		
+		Question exampleQuestion = new Question();
+		exampleQuestion.setId(questionId);
+		
+		Session exampleSession = new Session();
+		exampleSession.setId(sessionId);
+		
+		AnswerRecord exampleAnswer = new AnswerRecord();
+		exampleAnswer.setQuestion(exampleQuestion);
+		exampleAnswer.setSession(exampleSession);
+		
+		Example<AnswerRecord> answerExample = Example.of(exampleAnswer, ExampleMatcher.matchingAny());
+		
+		
+		
+		return answerRepo.findOne(answerExample);
 	}
 
 	@Override
-	public void saveAnswerRecords(List<AnswerRecord> answerRecords) {
+	public Mono<AnswerRecord> saveAnswerRecord(AnswerRecord answerRecord) {
 		// TODO Auto-generated method stub
-		answerRepo.saveAll(answerRecords);
+		return answerRepo.save(answerRecord);
 	}
 
 }
