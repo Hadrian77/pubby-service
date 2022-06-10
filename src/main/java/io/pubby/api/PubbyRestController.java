@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.pubby.data.DataService;
@@ -23,8 +24,9 @@ import reactor.core.publisher.Mono;
 import reactor.util.function.Tuple2;
 
 
-@RestController("/api")
-public class PubbyController {
+@RestController
+@RequestMapping("api")
+public class PubbyRestController {
 
 	@Autowired
 	DataService dataService;
@@ -32,7 +34,6 @@ public class PubbyController {
 	@GetMapping("/questions")
 	public Flux<Question> getQuestions() {
 
-		System.out.println("Working");
 
 		return dataService.getQuestions();
 
@@ -108,7 +109,9 @@ public class PubbyController {
 		
 		return answerRecordAndPlayer.map(result -> {
 
+			
 
+			
 			if(result.getT1()== null) {
 			
 			}
@@ -117,6 +120,7 @@ public class PubbyController {
 			result.getT1().getPlayerResponses().add(playerResponse);
 			result.getT1().setIsChildQuestion(false);
 
+			
 			return dataService.saveAnswerRecord(result.getT1());
 		});
 

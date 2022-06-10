@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pubby - New Question</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+  	<form th:action="@{question/submit}" method="post" th:object="${question}" id="questionForm" >
+  	
+  		
+  		<label th:text="'Pack: '+${question.pack}"></label><br/>
+  		<label>Type:</label>
+        <select th:field="*{type}">
+            <option th:each="p : ${questionTypes}" th:value="${p}" th:text="${p}" />
+        </select>
+        <br/>
+  	
+  	  	<label>Description</label><br/>
+		<textarea name="description" rows="20" cols="80" th:field="*{description}" form="questionform"/>
+		
+		<button type="submit">Submit</button> 
+  	
+  	
+  	
+  	</form>
+  	<script src="index.js"></script>
+  </body>
+</html>

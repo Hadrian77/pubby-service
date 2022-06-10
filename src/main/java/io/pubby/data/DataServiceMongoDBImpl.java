@@ -50,6 +50,12 @@ public class DataServiceMongoDBImpl implements DataService {
 		return questionRepo.saveAll(questions);
 		
 	}
+	
+	public Mono<Question> saveQuestion(Question question) {
+		// TODO Auto-generated method stub
+		return questionRepo.save(question);
+		
+	}
 
 	@Override
 	public Mono<Session> saveSession(Session session) {

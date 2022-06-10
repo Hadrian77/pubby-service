@@ -16,6 +16,7 @@ public interface DataService {
 	public Mono<Question> getQuestion(String questionId);
 	
 	public Flux<Question> saveQuestions(List<Question> questions);
+	public Mono<Question> saveQuestion(Question question);
 
 	
 	public Mono<Session> saveSession(Session session);

@@ -19,10 +19,10 @@ public class AnswerRecord {
 	@Id
 	String id;
 	
-	@DocumentReference
+	
 	Question question;
 	
-	@DocumentReference
+	
 	Session session;
 	
 

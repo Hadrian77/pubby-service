@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pubby - New Question</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+  	<form th:action="@{/question/submit}" method="post" >
+  	
+  	
+  	  	<label>Full name:</label>
+        <input type="text" th:field="*{name}" /><br/>
+ 
+        <label>E-mail:</label>
+        <input type="text" th:field="*{email}" /><br/>
+ 
+        <label>Password:</label>
+        <input type="password" th:field="*{password}" /><br/>
+ 
+        <label>Birthday (yyyy-mm-dd):</label>
+        <input type="text" th:field="*{birthday}" /><br/>
+  	
+  	
+  	
+  	</form>
+  	<script src="index.js"></script>
+  </body>
+</html>
