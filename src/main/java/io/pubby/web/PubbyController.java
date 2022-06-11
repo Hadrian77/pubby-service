@@ -15,6 +15,7 @@ import io.pubby.data.DataService;
 import io.pubby.models.Question;
 
 @Controller
+@SessionAttributes("question")
 public class PubbyController {
 
 	@Autowired
@@ -41,16 +42,19 @@ public class PubbyController {
 		
 		List<String> questionTypes = Arrays.asList("left_or_right", "would_you_rather", "player_vote");
         model.addAttribute("questionTypes", questionTypes);
-
+        question.setId(null);
+        question.setDescription("");
 		return "question-form";
 
 	}
 
 	@RequestMapping("/question/submit")
-	public String submitForm(Model model, SessionStatus status) {
+	public String submitForm(Model model, SessionStatus status, @ModelAttribute Question question) {
 
-		dataService.saveQuestion((Question) model.getAttribute("question"));
-		status.setComplete();
+		
+		dataService.saveQuestion(question).subscribe();
+		
+		System.out.println(question);
 		return "question-submit";
 
 	}

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-  	<form th:action="@{question/submit}" method="post" th:object="${question}" id="questionForm" >
+  	<form th:action="@{/question/submit}" method="post" th:object="${question}" id="questionForm" >
   	
   		
   		<label th:text="'Pack: '+${question.pack}"></label><br/>
@@ -19,9 +19,9 @@
         <br/>
   	
   	  	<label>Description</label><br/>
-		<textarea name="description" rows="20" cols="80" th:field="*{description}" form="questionform"/>
+		<textarea name="description" rows="20" cols="80" th:field="${question.description}" form="questionForm"></textarea>
 		
-		<button type="submit">Submit</button> 
+		<input type="submit" value="Submit"/>
   	
   	
   	

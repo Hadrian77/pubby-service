@@ -1,31 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymleaf.org">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pubby - New Question</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-  	<form th:action="@{/question/submit}" method="post" >
-  	
-  	
-  	  	<label>Full name:</label>
-        <input type="text" th:field="*{name}" /><br/>
- 
-        <label>E-mail:</label>
-        <input type="text" th:field="*{email}" /><br/>
- 
-        <label>Password:</label>
-        <input type="password" th:field="*{password}" /><br/>
- 
-        <label>Birthday (yyyy-mm-dd):</label>
-        <input type="text" th:field="*{birthday}" /><br/>
-  	
-  	
-  	
-  	</form>
-  	<script src="index.js"></script>
-  </body>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Registration Success</title>
+<style type="text/css">
+    span {
+        display: inline-block;
+        width: 200px;
+        text-align: left;
+    }
+</style>
+</head>
+<body>
+<div align="center">
+    <h2>Registration Succeeded!</h2>
+    <span>Id:</span><span th:text="${question.id}"></span><br/>
+    <span>Pack:</span><span th:text="${question.pack}"></span><br/>
+    <span>Description:</span><span th:text="${question.description}"></span><br/>
+    
+    <a th:href="@{/question/form}">Another Question</a>
+</div>
+</body>
 </html>
