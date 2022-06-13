@@ -1,2 +1,2 @@
 # pubby.io
- Player-centered trivia drinking game
+ Player-centered trivia game
