@@ -3,7 +3,6 @@ package io.pubby.data;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -64,7 +63,7 @@ public class DataServiceMongoDBImpl implements DataService {
 				}
 
 			}
-			//Returns false if keywords or tags are null
+			// Returns false if keywords or tags are null
 			else {
 
 				return false;

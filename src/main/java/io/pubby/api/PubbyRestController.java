@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.pubby.data.DataService;
@@ -32,14 +33,6 @@ public class PubbyRestController {
 	@Autowired
 	DataService dataService;
 
-	@GetMapping("/questions")
-	public Flux<Question> getQuestions() {
-
-
-		return dataService.getQuestions();
-
-	}
-	
 	@GetMapping("/questions/{questionId}")
 	public Mono<Question> getQuestion(@PathVariable String questionId) {
 
@@ -48,11 +41,10 @@ public class PubbyRestController {
 
 	}
 	
-	@GetMapping("/questions/search")
-	public Flux<Question> getQuestionsByMetaData(@RequestBody Map<String,List<String>> metadata) {
+	@GetMapping("/questions")
+	public Flux<Question> getQuestionsByMetaData(@RequestParam(required = false,defaultValue="") List<String> keywords,
+			@RequestParam(required = false,defaultValue="") List<String> tags) {
 
-		List<String> keywords = metadata.get("keywords");
-		List<String> tags = metadata.get("tags");
 		
 		return dataService.getQuestionsByMetaData(keywords,tags);
 
