@@ -40,6 +40,14 @@ public class PubbyRestController {
 
 	}
 	
+	@GetMapping("/questions/{questionId}")
+	public Mono<Question> getQuestion(@PathVariable String questionId) {
+
+
+		return dataService.getQuestion(questionId);
+
+	}
+	
 	@GetMapping("/questions/search")
 	public Flux<Question> getQuestionsByMetaData(@RequestBody Map<String,List<String>> metadata) {
 
