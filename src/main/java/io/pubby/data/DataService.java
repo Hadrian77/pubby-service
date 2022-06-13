@@ -13,6 +13,7 @@ public interface DataService {
 	
 	
 	public Flux<Question> getQuestions();
+	public Flux<Question> getQuestionsByMetaData(List<String> keywords,List<String> tags);
 	public Mono<Question> getQuestion(String questionId);
 	
 	public Flux<Question> saveQuestions(List<Question> questions);

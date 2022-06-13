@@ -3,6 +3,7 @@ package io.pubby.api;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +39,17 @@ public class PubbyRestController {
 		return dataService.getQuestions();
 
 	}
+	
+	@GetMapping("/questions/search")
+	public Flux<Question> getQuestionsByMetaData(@RequestBody Map<String,List<String>> metadata) {
+
+		List<String> keywords = metadata.get("keywords");
+		List<String> tags = metadata.get("tags");
+		
+		return dataService.getQuestionsByMetaData(keywords,tags);
+
+	}
+
 
 	@PostMapping("/questions")
 	public Flux<Question> createQuestions(@RequestBody List<Question> questions) {

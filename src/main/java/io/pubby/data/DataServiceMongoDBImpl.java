@@ -1,6 +1,8 @@
 package io.pubby.data;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -38,7 +40,40 @@ public class DataServiceMongoDBImpl implements DataService {
 		// TODO Auto-generated method stub
 		return questionRepo.findAll();
 	}
-	
+
+	public Flux<Question> getQuestionsByMetaData(List<String> keywords, List<String> tags) {
+
+		return questionRepo.findAll().filter(result -> {
+
+			if (result.getTags() != null && result.getKeywords() != null) {
+				List<String> copiedTags = new ArrayList<String>(tags);
+				List<String> copiedKeywords = new ArrayList<String>(keywords);
+
+				copiedTags.retainAll(result.getTags());
+				copiedKeywords.retainAll(result.getKeywords());
+
+				if (copiedTags.equals(tags) && copiedKeywords.equals(keywords)) {
+
+					return true;
+
+				}
+
+				else {
+
+					return false;
+				}
+
+			}
+			//Returns false if keywords or tags are null
+			else {
+
+				return false;
+
+			}
+
+		});
+	}
+
 	public Mono<Question> getQuestion(String questionId) {
 		// TODO Auto-generated method stub
 		return questionRepo.findById(questionId);
@@ -48,18 +83,18 @@ public class DataServiceMongoDBImpl implements DataService {
 	public Flux<Question> saveQuestions(List<Question> questions) {
 		// TODO Auto-generated method stub
 		return questionRepo.saveAll(questions);
-		
+
 	}
-	
+
 	public Mono<Question> saveQuestion(Question question) {
 		// TODO Auto-generated method stub
 		return questionRepo.save(question);
-		
+
 	}
 
 	@Override
 	public Mono<Session> saveSession(Session session) {
-		
+
 		return sessionRepo.save(session);
 	}
 
@@ -97,21 +132,19 @@ public class DataServiceMongoDBImpl implements DataService {
 
 	@Override
 	public Mono<AnswerRecord> getAnswerRecordByQuestionId(String questionId, String sessionId) {
-		
+
 		Question exampleQuestion = new Question();
 		exampleQuestion.setId(questionId);
-		
+
 		Session exampleSession = new Session();
 		exampleSession.setId(sessionId);
-		
+
 		AnswerRecord exampleAnswer = new AnswerRecord();
 		exampleAnswer.setQuestion(exampleQuestion);
 		exampleAnswer.setSession(exampleSession);
-		
+
 		Example<AnswerRecord> answerExample = Example.of(exampleAnswer, ExampleMatcher.matchingAny());
-		
-		
-		
+
 		return answerRepo.findOne(answerExample);
 	}
 
