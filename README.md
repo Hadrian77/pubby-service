@@ -1,2 +1,2 @@
 # pubby.io
- Player-centered trivia game
+ Service for player-centered trivia game
