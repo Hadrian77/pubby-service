@@ -23,15 +23,21 @@ public class Question {
 	
 	String pack;
 	
+	List<String> answers;
+	
 	List<String> keywords;
 	
 	List<String> tags;
 
-	public Question(String type, String description, String pack, List<String> keywords, List<String> tags) {
+
+
+	public Question(String type, String description, String pack, List<String> answers, List<String> keywords,
+			List<String> tags) {
 		super();
 		this.type = type;
 		this.description = description;
 		this.pack = pack;
+		this.answers = answers;
 		this.keywords = keywords;
 		this.tags = tags;
 	}
@@ -71,6 +77,15 @@ public class Question {
 	public void setPack(String pack) {
 		this.pack = pack;
 	}
+	
+
+	public List<String> getAnswers() {
+		return answers;
+	}
+
+	public void setAnswers(List<String> answers) {
+		this.answers = answers;
+	}
 
 	public List<String> getKeywords() {
 		return keywords;
@@ -91,8 +106,9 @@ public class Question {
 	@Override
 	public String toString() {
 		return "Question [id=" + id + ", type=" + type + ", description=" + description + ", pack=" + pack
-				+ ", keywords=" + keywords + ", tags=" + tags + "]";
+				+ ", answers=" + answers + ", keywords=" + keywords + ", tags=" + tags + "]";
 	}
+
 	
 	
 	

@@ -2,10 +2,8 @@ package io.pubby.models;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -18,8 +16,17 @@ public class Session {
 	
 	Date timeStamp;
 	
+	List<Question> questionDeck;	
 	
 	
+
+	public Session() {
+		
+		this.timeStamp = new Timestamp(System.currentTimeMillis());
+	}
+
+
+
 	public String getId() {
 		return id;
 	}
@@ -36,18 +43,31 @@ public class Session {
 		return timeStamp;
 	}
 
+	
 
 
-	public void setTimeStamp(Timestamp timeStamp) {
+	public void setTimeStamp(Date timeStamp) {
 		this.timeStamp = timeStamp;
 	}
 
 
 
+	public List<Question> getQuestionDeck() {
+		return questionDeck;
+	}
+
+
+
+	public void setQuestionDeck(List<Question> questionDeck) {
+		this.questionDeck = questionDeck;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Session [id=" + id + ", timeStamp=" + timeStamp + "]";
+		return "Session [id=" + id + ", timeStamp=" + timeStamp + ", questionDeck=" + questionDeck + "]";
 	}
+	
 	
 
 }

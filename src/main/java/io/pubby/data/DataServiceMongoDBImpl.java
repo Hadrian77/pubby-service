@@ -40,19 +40,30 @@ public class DataServiceMongoDBImpl implements DataService {
 		return questionRepo.findAll();
 	}
 
-	public Flux<Question> getQuestionsByMetaData(List<String> keywords, List<String> tags) {
+	public Flux<Question> getQuestionsByMetaData(List<String> keywords,List<String> excludedKeywords, List<String> tags,List<String> excludedTags) {
 
 		return questionRepo.findAll().filter(result -> {
 
 			if (result.getTags() != null && result.getKeywords() != null) {
 				List<String> copiedTags = new ArrayList<String>(tags);
 				List<String> copiedKeywords = new ArrayList<String>(keywords);
-
-				copiedTags.retainAll(result.getTags());
-				copiedKeywords.retainAll(result.getKeywords());
-
-				if (copiedTags.equals(tags) && copiedKeywords.equals(keywords)) {
-
+				List<String> copiedExcludedTags = new ArrayList<String>(excludedTags);
+				List<String> copiedExcludedKeywords = new ArrayList<String>(excludedKeywords);
+				List<String> resultTags = result.getTags();
+				List<String> resultKeywords = result.getKeywords();
+				
+	
+				copiedTags.retainAll(resultTags);
+				copiedKeywords.retainAll(resultKeywords);
+				
+				boolean matchesMetadata = copiedTags.equals(tags) && copiedKeywords.equals(keywords);
+				boolean matchesExcludedTags = sharesSimiliarListItem(resultTags, copiedExcludedTags);
+				boolean matchesExcludedKeywords = sharesSimiliarListItem(resultKeywords,copiedExcludedKeywords);
+				
+				
+				if (matchesMetadata && !(matchesExcludedTags || matchesExcludedKeywords)){
+				
+					
 					return true;
 
 				}
@@ -73,6 +84,21 @@ public class DataServiceMongoDBImpl implements DataService {
 		});
 	}
 
+	private boolean sharesSimiliarListItem(List<String> checkedList,List<String> containingList) {
+		
+		for(String listItem : containingList) {
+			if(checkedList.contains(listItem)) {
+				return true;
+			}
+			else {
+				continue;
+			}
+		}
+		
+		return false;
+		
+	}
+	
 	public Mono<Question> getQuestion(String questionId) {
 		// TODO Auto-generated method stub
 		return questionRepo.findById(questionId);
@@ -132,6 +158,7 @@ public class DataServiceMongoDBImpl implements DataService {
 	@Override
 	public Mono<AnswerRecord> getAnswerRecordByQuestionId(String questionId, String sessionId) {
 
+		System.out.println("Starting to get answer record");
 		Question exampleQuestion = new Question();
 		exampleQuestion.setId(questionId);
 
@@ -141,8 +168,12 @@ public class DataServiceMongoDBImpl implements DataService {
 		AnswerRecord exampleAnswer = new AnswerRecord();
 		exampleAnswer.setQuestion(exampleQuestion);
 		exampleAnswer.setSession(exampleSession);
+		
+		
 
-		Example<AnswerRecord> answerExample = Example.of(exampleAnswer, ExampleMatcher.matchingAny());
+		Example<AnswerRecord> answerExample = Example.of(exampleAnswer, ExampleMatcher.matchingAll());
+		
+		System.out.println("Right before match");
 
 		return answerRepo.findOne(answerExample);
 	}
