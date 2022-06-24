@@ -78,7 +78,7 @@ public class PubbyRestController {
 
 		return session.map(result -> {
 
-			player.setSession(result);
+			player.setSessionId(result.getId());
 			return dataService.savePlayer(player);
 		});
 
@@ -100,8 +100,8 @@ public class PubbyRestController {
 
 		return questionAndSession.map(result -> {
 
-			answerRecord.setQuestion(result.getT1());
-			answerRecord.setSession(result.getT2());
+			answerRecord.setQuestionId(result.getT1().getId());
+			answerRecord.setSessionId(result.getT2().getId());
 			answerRecord.setPlayerResponses(new ArrayList<PlayerResponse>());
 
 			return dataService.saveAnswerRecord(answerRecord);

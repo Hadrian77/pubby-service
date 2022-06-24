@@ -139,9 +139,7 @@ public class DataServiceMongoDBImpl implements DataService {
 	public Flux<Player> getPlayersBySessionId(String sessionId) {
 
 		Player examplePlayer = new Player();
-		Session sessionExample = new Session();
-		sessionExample.setId(sessionId);
-		examplePlayer.setSession(sessionExample);
+		examplePlayer.setSessionId(sessionId);
 
 		Example<Player> playerExample = Example.of(examplePlayer, ExampleMatcher.matchingAny());
 
@@ -159,16 +157,11 @@ public class DataServiceMongoDBImpl implements DataService {
 	public Mono<AnswerRecord> getAnswerRecordByQuestionId(String questionId, String sessionId) {
 
 		System.out.println("Starting to get answer record");
-		Question exampleQuestion = new Question();
-		exampleQuestion.setId(questionId);
-
-		Session exampleSession = new Session();
-		exampleSession.setId(sessionId);
+	
 
 		AnswerRecord exampleAnswer = new AnswerRecord();
-		exampleAnswer.setQuestion(exampleQuestion);
-		exampleAnswer.setSession(exampleSession);
-		
+		exampleAnswer.setQuestionId(questionId);
+		exampleAnswer.setSessionId(sessionId);
 		
 
 		Example<AnswerRecord> answerExample = Example.of(exampleAnswer, ExampleMatcher.matchingAll());

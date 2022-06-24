@@ -1,12 +1,11 @@
 package io.pubby.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+
 
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 @Document
 public class Player {
@@ -18,7 +17,8 @@ public class Player {
 	
 	String secretName;
 	
-	Session session;
+	
+	String sessionId;
 	
 
 	public Player(String name, String secretName) {
@@ -58,13 +58,22 @@ public class Player {
 		this.secretName = secretName;
 	}
 
-	public Session getSession() {
-		return session;
+
+	public String getSessionId() {
+		return sessionId;
 	}
 
-	public void setSession(Session session) {
-		this.session = session;
+
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Player [id=" + id + ", name=" + name + ", secretName=" + secretName + ", sessionId=" + sessionId + "]";
+	}
+
 	
 	
 	

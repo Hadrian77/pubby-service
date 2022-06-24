@@ -19,29 +19,31 @@ public class AnswerRecord {
 	@Id
 	String id;
 	
+	String questionId;
 	
-	Question question;
+	String sessionId;
 	
-	
-	Session session;
-	
-
 	List<PlayerResponse> playerResponses;
 	
 	Boolean isChildQuestion;
 	
 
 	public AnswerRecord() {
-		super();
+	
 	}
 
-	public AnswerRecord(Question question, Session session, List<PlayerResponse> playerResponses, Boolean isChildQuestion) {
+	
+
+	public AnswerRecord(String questionId, String sessionId, List<PlayerResponse> playerResponses,
+			Boolean isChildQuestion) {
 		super();
-		this.question = question;
-		this.session = session;
+		this.questionId = questionId;
+		this.sessionId = sessionId;
 		this.playerResponses = playerResponses;
 		this.isChildQuestion = isChildQuestion;
 	}
+
+
 
 	public String getId() {
 		return id;
@@ -51,21 +53,31 @@ public class AnswerRecord {
 		this.id = id;
 	}
 
-	public Question getQuestion() {
-		return question;
+	
+
+	public String getQuestionId() {
+		return questionId;
 	}
 
-	public void setQuestion(Question question) {
-		this.question = question;
+
+
+	public void setQuestionId(String questionId) {
+		this.questionId = questionId;
 	}
 
-	public Session getSession() {
-		return session;
+
+
+	public String getSessionId() {
+		return sessionId;
 	}
 
-	public void setSession(Session session) {
-		this.session = session;
+
+
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
 	}
+
+
 
 	public List<PlayerResponse> getPlayerResponses() {
 		return playerResponses;
@@ -83,11 +95,14 @@ public class AnswerRecord {
 		this.isChildQuestion = isChildQuestion;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "AnswerRecord [id=" + id + ", question=" + question + ", session=" + session + ", playerResponses="
-				+ playerResponses + ", isChildQuestion=" + isChildQuestion + "]";
+		return "AnswerRecord [id=" + id + ", questionId=" + questionId + ", sessionId=" + sessionId
+				+ ", playerResponses=" + playerResponses + ", isChildQuestion=" + isChildQuestion + "]";
 	}
+
 	
 	
 
