@@ -27,7 +27,7 @@ import reactor.core.publisher.Mono;
 import reactor.util.function.Tuple2;
 
 @RestController
-@CrossOrigin	
+@CrossOrigin(origins = "https://adrianharris.tech")	
 @RequestMapping("api")
 public class PubbyRestController {
 
