@@ -1,0 +1,8 @@
+spring:
+  data:
+    mongodb:
+      uri: '${MONGO_URI}'
+springdoc:
+  swagger-ui:
+    tagsSorter: alpha
+    operations-sorter: alpha
