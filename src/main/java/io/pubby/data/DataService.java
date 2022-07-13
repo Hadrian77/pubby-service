@@ -3,6 +3,7 @@ package io.pubby.data;
 import java.util.List;
 
 import io.pubby.models.AnswerRecord;
+import io.pubby.models.ChildQuestion;
 import io.pubby.models.Player;
 import io.pubby.models.Question;
 import io.pubby.models.Session;
@@ -18,7 +19,13 @@ public interface DataService {
 	
 	public Flux<Question> saveQuestions(List<Question> questions);
 	public Mono<Question> saveQuestion(Question question);
-
+	
+	
+	
+	public Flux<ChildQuestion> getChildQuestions(String questionId);
+	
+	public Flux<ChildQuestion> saveChildQuestions(List<ChildQuestion> childQuestions);
+	
 	
 	public Mono<Session> saveSession(Session session);
 	public Mono<Session> getSession(String sessionId);

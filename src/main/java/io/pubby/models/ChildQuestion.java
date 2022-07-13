@@ -8,24 +8,24 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class ChildQuestion extends Question {
 	
 
-	private Question parentQuestion;
-	
-	
+	private String parentQuestionId;
 
-	public Question getParentQuestion() {
-		return parentQuestion;
+	public String getParentQuestionId() {
+		return parentQuestionId;
 	}
 
-	public void setParentQuestion(Question parentQuestion) {
-		this.parentQuestion = parentQuestion;
+	public void setParentQuestionId(String parentQuestionId) {
+		this.parentQuestionId = parentQuestionId;
 	}
 
 	@Override
 	public String toString() {
-		return "=ChildQuestion [parentQuestion=" + parentQuestion + ", id=" + id + ", type=" + type + ", description="
-				+ description + ", pack=" + pack + ", keywords=" + keywords + ", tags=" + tags + "]";
+		return "ChildQuestion [parentQuestionId=" + parentQuestionId + ", id=" + id + ", type=" + type
+				+ ", description=" + description + ", pack=" + pack + ", answers=" + answers + ", keywords=" + keywords
+				+ ", tags=" + tags + "]";
 	}
-
+	
+	
 	
 	
 	

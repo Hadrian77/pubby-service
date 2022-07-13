@@ -9,10 +9,12 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import io.pubby.models.AnswerRecord;
+import io.pubby.models.ChildQuestion;
 import io.pubby.models.Player;
 import io.pubby.models.Question;
 import io.pubby.models.Session;
 import io.pubby.repositories.AnswerRecordRepository;
+import io.pubby.repositories.ChildQuestionRepository;
 import io.pubby.repositories.PlayerRepository;
 import io.pubby.repositories.QuestionRepository;
 import io.pubby.repositories.SessionRepository;
@@ -33,6 +35,9 @@ public class DataServiceMongoDBImpl implements DataService {
 
 	@Autowired
 	PlayerRepository playerRepo;
+	
+	@Autowired
+	ChildQuestionRepository childQuestionRepo;
 
 	@Override
 	public Flux<Question> getQuestions() {
@@ -116,6 +121,22 @@ public class DataServiceMongoDBImpl implements DataService {
 		return questionRepo.save(question);
 
 	}
+	
+	public Flux<ChildQuestion> getChildQuestions(String questionId) {
+		// TODO Auto-generated method stub
+		ChildQuestion exampleChildQuestion = new ChildQuestion();
+		exampleChildQuestion.setParentQuestionId(questionId);
+
+		Example<ChildQuestion> childQuestionExample = Example.of(exampleChildQuestion, ExampleMatcher.matchingAll());
+
+		return childQuestionRepo.findAll(childQuestionExample);
+	}
+	
+	public Flux<ChildQuestion> saveChildQuestions(List<ChildQuestion> childQuestions) {
+		// TODO Auto-generated method stub
+		return childQuestionRepo.saveAll(childQuestions);
+
+	}
 
 	@Override
 	public Mono<Session> saveSession(Session session) {
@@ -156,7 +177,6 @@ public class DataServiceMongoDBImpl implements DataService {
 	@Override
 	public Mono<AnswerRecord> getAnswerRecordByQuestionId(String questionId, String sessionId) {
 
-		System.out.println("Starting to get answer record");
 	
 
 		AnswerRecord exampleAnswer = new AnswerRecord();
@@ -166,7 +186,7 @@ public class DataServiceMongoDBImpl implements DataService {
 
 		Example<AnswerRecord> answerExample = Example.of(exampleAnswer, ExampleMatcher.matchingAll());
 		
-		System.out.println("Right before match");
+	
 
 		return answerRepo.findOne(answerExample);
 	}

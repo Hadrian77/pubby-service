@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.pubby.data.DataService;
 import io.pubby.models.AnswerRecord;
+import io.pubby.models.ChildQuestion;
 import io.pubby.models.Player;
 import io.pubby.models.PlayerResponse;
 import io.pubby.models.Question;
@@ -56,6 +57,20 @@ public class PubbyRestController {
 	public Flux<Question> createQuestions(@RequestBody List<Question> questions) {
 
 		return dataService.saveQuestions(questions);
+
+	}
+	
+	@GetMapping("/questions/{questionId}/child-questions")
+	public Flux<ChildQuestion> getChildQuestions(@PathVariable String questionId) {
+
+		return dataService.getChildQuestions(questionId);
+
+	}
+	
+	@PostMapping("/questions")
+	public Flux<ChildQuestion> createChildQuestions(@RequestBody List<ChildQuestion> childQuestions) {
+
+		return dataService.saveChildQuestions(childQuestions);
 
 	}
 
