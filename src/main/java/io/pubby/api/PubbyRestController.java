@@ -69,6 +69,12 @@ public class PubbyRestController {
 	
 	@PostMapping("/questions/{questionId}/child-questions")
 	public Flux<ChildQuestion> createChildQuestions(@RequestBody List<ChildQuestion> childQuestions, @PathVariable String questionId) {
+		
+		for(ChildQuestion childQuestion : childQuestions) {
+		  
+			childQuestion.setParentQuestionId(questionId);	
+			
+			}
 
 		return dataService.saveChildQuestions(childQuestions);
 
